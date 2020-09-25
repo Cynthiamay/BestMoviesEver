@@ -1,0 +1,6 @@
+framework module Pods_BestMoviesEver {
+  umbrella header "Pods-BestMoviesEver-umbrella.h"
+
+  export *
+  module * { export * }
+}
