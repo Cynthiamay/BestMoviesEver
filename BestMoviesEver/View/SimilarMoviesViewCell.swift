@@ -1,5 +1,5 @@
 //
-//  DetailsTableViewCell.swift
+//  SimilarMoviesViewCell.swift
 //  BestMoviesEver
 //
 //  Created by cynthia watanabe on 25/09/20.
@@ -11,12 +11,12 @@ import UIKit
 import SnapKit
 import Reusable
 
-class DetailsTableViewCell: UITableViewCell, Reusable {
+class SimilarMoviesViewCell: UITableViewCell, Reusable {
     
     private(set) var container = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 446))
     
     lazy var moviePoster: UIImageView = {
-      let poster = UIImageView(frame: .zero)
+        let poster = UIImageView(frame: .zero)
         poster.isAccessibilityElement = false
         poster.clipsToBounds = true
         poster.contentMode = .scaleAspectFit
@@ -24,19 +24,10 @@ class DetailsTableViewCell: UITableViewCell, Reusable {
     }()
     
     lazy var lblTitle: UILabel = {
-       let title = UILabel(frame: .zero)
+        let title = UILabel(frame: .zero)
         title.textColor = UIColor.blue
         title.isAccessibilityElement = true
         return title
-    }()
-    
-    lazy var btnHeart: UIButton = {
-       let btn = UIButton(frame: .zero)
-        btn.setTitle("coracao", for: .normal)
-        btn.setTitleColor(UIColor.red, for: .normal)
-//        btn.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
-        btn.isAccessibilityElement = true
-        return btn
     }()
     
     func setup(movieTitle: String) {
@@ -46,7 +37,7 @@ class DetailsTableViewCell: UITableViewCell, Reusable {
     }
 }
 
-extension DetailsTableViewCell: ViewConfiguration {
+extension SimilarMoviesViewCell: ViewConfiguration {
     func buildViewHierarchy() {
         addSubview(container)
         container.addSubview(moviePoster)
@@ -74,6 +65,6 @@ extension DetailsTableViewCell: ViewConfiguration {
     
     func configureViews() {
         container.backgroundColor = .clear
-        moviePoster.backgroundColor = .red
+        moviePoster.backgroundColor = .blue
     }
 }
