@@ -11,12 +11,14 @@ import Foundation
 public class MovieAPI {
     
     weak var delegate: MoviesDatasourceDelegate?
+    private var dataTask: URLSessionDataTask?
     let baseURL: String = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+    let urlSimilar = "http://api.themoviedb.org/3/movie/497/similar?api_key=f3ed49f55cf67d06db9ad41bccf247d4&language=pt-BR&page=1"
     
-    init(delegate: MoviesDatasourceDelegate?) {
-        self.delegate = delegate
-    }
-
+//    init(delegate: MoviesDatasourceDelegate?) {
+//        self.delegate = delegate
+//    }
+    
     func getMovieDetails(from url: String) {
         
         let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
@@ -35,9 +37,6 @@ public class MovieAPI {
             guard let json = result else {
                 return
             }
-            
-            self.delegate?.title = json.title
-            self.delegate?.urlImage = self.baseURL + json.poster_path
 //            print(json.id)
 //            print(json.overview)
 //            print(json.popularity)
@@ -48,32 +47,37 @@ public class MovieAPI {
         task.resume()
     }
     
-    func getSimilarMovies(from url: String) {
-        
-        let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
-            guard let data = data, error == nil else {
-                print("something went wrong")
+    func getSimilarMovies(completion: @escaping (Result<SimilarMoviesResponse, Error>) -> Void) {
+     
+        guard let url = URL(string: urlSimilar) else {return}
+     
+        dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                completion(.failure(error))
+                print("DataTask error: \(error.localizedDescription)")
                 return
             }
-            var result: SimilarMoviesResponse?
-            do {
-                result = try JSONDecoder().decode(SimilarMoviesResponse.self, from: data)
+            guard let response = response as? HTTPURLResponse else {
+                print("Empty Response")
+                return
             }
-            catch {
-                print("failed to convert \(error.localizedDescription)")
-            }
+            print("Response status code: \(response.statusCode)")
             
-            guard let json = result else {
+            guard let data = data else {
+                print("Empty Data")
                 return
             }
-//            print(json.results.description)
-            print(json.results.debugDescription)
-//            print(json.results)
-//            self.delegate?.titleSimilarMovies = json.results[0]
-        })
-        task.resume()
+            do {
+                let decoder = JSONDecoder()
+                let jsonData = try decoder.decode(SimilarMoviesResponse.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(.success(jsonData))
+                }
+            } catch let error {
+                completion(.failure(error))
+            }
+        }
+        dataTask?.resume()
     }
-
-    
-
 }

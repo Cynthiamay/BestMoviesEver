@@ -13,7 +13,9 @@ import Reusable
 
 class SimilarMoviesViewCell: UITableViewCell, Reusable {
     
-    private(set) var container = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 446))
+    
+    
+    private(set) var container = UIView()
     
     lazy var moviePoster: UIImageView = {
         let poster = UIImageView(frame: .zero)
@@ -25,12 +27,34 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
     
     lazy var lblTitle: UILabel = {
         let title = UILabel(frame: .zero)
-        title.textColor = UIColor.blue
+        title.textColor = UIColor.red
         title.isAccessibilityElement = true
         return title
     }()
     
-    func setup(movieTitle: String) {
+    lazy var lblYear: UILabel = {
+        let title = UILabel(frame: .zero)
+        title.textColor = UIColor.red
+        title.isAccessibilityElement = true
+        return title
+    }()
+    
+    lazy var lblGenre: UILabel = {
+        let title = UILabel(frame: .zero)
+        title.textColor = UIColor.red
+        title.isAccessibilityElement = true
+        return title
+    }()
+    
+    func setCell(_ movie: Movies) {
+        updateUI(movieTitle: movie.title,
+                 releaseDate: movie.release_date,
+                 genre: movie.genre_ids)
+    }
+    
+    private func updateUI(movieTitle: String,
+                          releaseDate: String,
+                          genre: [Int]) {
         setupViewConfiguration()
         
         self.lblTitle.text = movieTitle
@@ -42,14 +66,16 @@ extension SimilarMoviesViewCell: ViewConfiguration {
         addSubview(container)
         container.addSubview(moviePoster)
         container.addSubview(lblTitle)
+        container.addSubview(lblYear)
+        container.addSubview(lblGenre)
     }
     
     func setupConstraints() {
         moviePoster.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(1)
-            make.trailing.equalToSuperview().offset(1)
-            make.bottom.equalToSuperview().offset(-30)
-            make.top.equalToSuperview().offset(1)
+            make.right.equalTo(container.snp.right).offset(5)
+//            make.trailing.equalToSuperview().offset(1)
+            make.top.equalTo(container.snp.top).offset(1)
+            make.bottom.equalTo(container.snp.bottom).offset(-1)
         }
         container.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -58,13 +84,24 @@ extension SimilarMoviesViewCell: ViewConfiguration {
             make.trailing.equalToSuperview()
         }
         lblTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(moviePoster.snp.bottom).offset(10)
-            make.centerX.equalToSuperview()
+            make.right.equalTo(moviePoster.snp.right).offset(5)
+            make.top.equalTo(container.snp.top).offset(5)
+            make.left.equalTo(container.snp.left).offset(-1)
+        }
+        lblYear.snp.makeConstraints { (make) in
+            make.right.equalTo(moviePoster.snp.right).offset(5)
+            make.top.equalTo(container.snp.top).offset(7)
+            make.left.equalTo(container.snp.left).offset(-1)
+        }
+        lblGenre.snp.makeConstraints { (make) in
+            make.right.equalTo(lblYear.snp.right).offset(1)
+            make.top.equalTo(container.snp.top).offset(7)
+            make.left.equalTo(container.snp.left).offset(-1)
         }
     }
     
     func configureViews() {
         container.backgroundColor = .clear
-        moviePoster.backgroundColor = .blue
+        moviePoster.backgroundColor = .clear
     }
 }

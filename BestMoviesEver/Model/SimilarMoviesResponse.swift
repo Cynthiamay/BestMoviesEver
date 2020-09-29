@@ -14,6 +14,7 @@ struct SimilarMoviesResponse: Codable {
 
 struct Movies: Codable {
     let title: String
-//    let release_date: String
-//    let poster_path: String
+    let release_date: String
+    let poster_path: String
+    let genre_ids: [Int]
 }

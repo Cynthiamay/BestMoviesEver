@@ -2,4 +2,86 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BestMoviesEver/View/SimilarMoviesViewCell.swift"
+            timestampString = "623051823.6736701"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "lblGenre"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BestMoviesEver/ViewModel/MovieViewModel.swift"
+            timestampString = "623051823.673768"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "numberOfRowsInSection(section:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BestMoviesEver/ViewModel/MovieViewModel.swift"
+            timestampString = "623051823.673843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "fetchSimilarMovies(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BestMoviesEver.MoviewViewModel.fetchSimilarMovies(completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "BestMoviesEver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cynthiawatanabe/Desktop/BestMoviesEver/BestMoviesEver/ViewModel/MovieViewModel.swift"
+                  timestampString = "623051823.870765"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;BestMoviesEver.SimilarMoviesResponse, Swift.Error&gt;) -&gt; () in BestMoviesEver.MoviewViewModel.fetchSimilarMovies(completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "BestMoviesEver"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/cynthiawatanabe/Desktop/BestMoviesEver/BestMoviesEver/ViewModel/MovieViewModel.swift"
+                  timestampString = "623051823.879432"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "307">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

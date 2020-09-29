@@ -13,15 +13,15 @@ import Reusable
 
 class DetailsTableViewCell: UITableViewCell, Reusable {
     
-    private(set) var container = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 446))
+    private(set) var container = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 446))
     
-    lazy var moviePoster: UIImageView = {
-      let poster = UIImageView(frame: .zero)
-        poster.isAccessibilityElement = false
-        poster.clipsToBounds = true
-        poster.contentMode = .scaleAspectFit
-        return poster
-    }()
+//    lazy var moviePoster: UIImageView = {
+//      let poster = UIImageView(frame: .zero)
+//        poster.isAccessibilityElement = false
+//        poster.clipsToBounds = true
+//        poster.contentMode = .scaleAspectFit
+//        return poster
+//    }()
     
     lazy var lblTitle: UILabel = {
        let title = UILabel(frame: .zero)
@@ -49,17 +49,17 @@ class DetailsTableViewCell: UITableViewCell, Reusable {
 extension DetailsTableViewCell: ViewConfiguration {
     func buildViewHierarchy() {
         addSubview(container)
-        container.addSubview(moviePoster)
+//        container.addSubview(moviePoster)
         container.addSubview(lblTitle)
     }
     
     func setupConstraints() {
-        moviePoster.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(1)
-            make.trailing.equalToSuperview().offset(1)
-            make.bottom.equalToSuperview().offset(-30)
-            make.top.equalToSuperview().offset(1)
-        }
+//        moviePoster.snp.makeConstraints { (make) in
+//            make.leading.equalToSuperview().offset(1)
+//            make.trailing.equalToSuperview().offset(1)
+//            make.bottom.equalToSuperview().offset(-30)
+//            make.top.equalToSuperview().offset(1)
+//        }
         container.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -67,13 +67,14 @@ extension DetailsTableViewCell: ViewConfiguration {
             make.trailing.equalToSuperview()
         }
         lblTitle.snp.makeConstraints { (make) in
-            make.top.equalTo(moviePoster.snp.bottom).offset(10)
+            make.centerY.equalToSuperview()
+//            make.top.equalTo(moviePoster.snp.bottom).offset(10)
             make.centerX.equalToSuperview()
         }
     }
     
     func configureViews() {
         container.backgroundColor = .clear
-        moviePoster.backgroundColor = .red
+//        moviePoster.backgroundColor = .red
     }
 }
