@@ -8,10 +8,12 @@
 
 import Foundation
 
-class MoviewViewModel {
+class MovieViewModel {
     
     private var apiService = MovieAPI()
     private var similarMovies = [Movies]()
+    var mainMovie: DetailMovieResponse?
+
     
     func fetchSimilarMovies(completion: @escaping () -> ()) {
         apiService.getSimilarMovies { (result) in
@@ -25,11 +27,20 @@ class MoviewViewModel {
         }
     }
     
-    func numberOfRowsInSection(section: Int) -> Int {
-        if similarMovies.count != 0 {
-            return similarMovies.count
+    func fetchMovieDetail(completion: @escaping () -> ()) {
+        apiService.getMovieDetails { (result) in
+            switch result {
+            case .success(let success):
+                self.mainMovie = success
+                completion()
+            case .failure(let error):
+                print("Error processing json data: \(error)")
+            }
         }
-        return 0
+    }
+    
+    func numberOfRowsInSection(section: Int) -> Int {
+        return similarMovies.count
     }
     
     func cellForRowAt(indexPath: IndexPath) -> Movies {

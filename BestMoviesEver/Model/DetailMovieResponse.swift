@@ -11,7 +11,6 @@ import Foundation
 struct DetailMovieResponse: Codable {
     
     let id: Int
-    let overview: String
     let popularity: Float
     let title: String
     let poster_path: String
