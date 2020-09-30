@@ -13,10 +13,6 @@ class MoviesViewController: UIViewController {
     
     private var viewModel = MovieViewModel()
     var apiService = MovieAPI()
-    
-    let urlDetails = "https://api.themoviedb.org/3/movie/497?api_key=f3ed49f55cf67d06db9ad41bccf247d4&language=pt-BR"
-    var urlImage: String = ""
-    
     let baseURL: String = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
     
     lazy var tableView: UITableView = {
@@ -38,7 +34,6 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         setTableViewDelegates()
         setupViewConfiguration()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,9 +51,9 @@ class MoviesViewController: UIViewController {
                 self?.tableView.dataSource = self
                 self?.tableView.delegate = self
                 self?.tableView.reloadData()
-                if let teste = self?.viewModel.mainMovie?.poster_path,
-                    let teste2 = self?.baseURL {
-                    self?.moviePoster.loadImageMovie(urlString: teste2 + teste)
+                if let poster = self?.viewModel.mainMovie?.poster_path,
+                    let base = self?.baseURL {
+                    self?.moviePoster.loadImageMovie(urlString: base + poster)
                 }
             }
         }
@@ -103,12 +98,14 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailsTableViewCell.self)
+            let cell = tableView.dequeueReusableCell(for: indexPath,
+                                                     cellType: DetailsTableViewCell.self)
             cell.setup(movieData: viewModel.mainMovie)
             cell.selectionStyle = .none
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SimilarMoviesViewCell.self)
+            let cell = tableView.dequeueReusableCell(for: indexPath,
+                                                     cellType: SimilarMoviesViewCell.self)
             let movie = viewModel.cellForRowAt(indexPath: indexPath)
             cell.setCell(movie)
             cell.selectionStyle = .none

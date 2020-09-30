@@ -71,7 +71,6 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
         moviePoster.loadImageMovie(urlString: baseURL)
         
         self.lblGenre.text = convertToGetGenre(genre: Array(genre.prefix(2)))
-        
     }
 
     func convertToGetGenre(genre: [Int]) -> String {
@@ -165,17 +164,16 @@ extension SimilarMoviesViewCell: ViewConfiguration {
             make.left.equalTo(moviePoster.snp.right).offset(10)
             make.right.equalTo(container.snp.right).offset(-15)
             make.top.equalTo(container.snp.top).offset(30)
-//            make.left.equalTo(container.snp.left).offset(-1)
         }
+        
         lblYear.snp.makeConstraints { (make) in
             make.left.equalTo(moviePoster.snp.right).offset(10)
             make.top.equalTo(lblTitle.snp.bottom).offset(8)
-//            make.left.equalTo(container.snp.left).offset(-1)
         }
+        
         lblGenre.snp.makeConstraints { (make) in
             make.left.equalTo(lblYear.snp.right).offset(1)
             make.top.equalTo(lblTitle.snp.bottom).offset(8)
-//            make.left.equalTo(container.snp.left).offset(-1)
         }
     }
     

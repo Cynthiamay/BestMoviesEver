@@ -14,7 +14,6 @@ class MovieViewModel {
     private var similarMovies = [Movies]()
     var mainMovie: DetailMovieResponse?
 
-    
     func fetchSimilarMovies(completion: @escaping () -> ()) {
         apiService.getSimilarMovies { (result) in
             switch result {

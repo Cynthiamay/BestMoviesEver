@@ -20,7 +20,6 @@ class DetailsTableViewCell: UITableViewCell, Reusable {
     lazy var lblTitle: UILabel = {
        let title = UILabel()
         title.textColor = UIColor.red
-//        title.font = title.font.withSize(30)
         title.font = UIFont.boldSystemFont(ofSize: 30)
         title.numberOfLines = 2
         title.isAccessibilityElement = true
@@ -90,8 +89,6 @@ class DetailsTableViewCell: UITableViewCell, Reusable {
             self.lblLikes.text = "\(String(describing: popularity)) Curtidas"
             self.lblViews.text = "▶ \(String(describing: voteCount)) Views"
         }
-        
-        
     }
 }
 
@@ -142,6 +139,5 @@ extension DetailsTableViewCell: ViewConfiguration {
     
     func configureViews() {
         container.backgroundColor = .black
-//        moviePoster.backgroundColor = .red
     }
 }

@@ -15,7 +15,6 @@ protocol ViewConfiguration: class {
     func configureViews()
 }
 
-
 extension ViewConfiguration {
     func setupViewConfiguration() {
         buildViewHierarchy()
