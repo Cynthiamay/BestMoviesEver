@@ -17,6 +17,8 @@ class MoviesViewController: UIViewController {
     let urlDetails = "https://api.themoviedb.org/3/movie/497?api_key=f3ed49f55cf67d06db9ad41bccf247d4&language=pt-BR"
     var urlImage: String = ""
     
+    let baseURL: String = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
+    
     lazy var tableView: UITableView = {
        let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -36,6 +38,7 @@ class MoviesViewController: UIViewController {
         super.viewDidLoad()
         setTableViewDelegates()
         setupViewConfiguration()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,13 +48,18 @@ class MoviesViewController: UIViewController {
     func setTableViewDelegates() {
         tableView.register(cellType: DetailsTableViewCell.self)
         tableView.register(cellType: SimilarMoviesViewCell.self)
-        tableView.contentInset = UIEdgeInsets(top: 500, left: 0, bottom: 0, right: 0)
-        tableView.rowHeight = 150
+        tableView.contentInset = UIEdgeInsets(top: 350, left: 0, bottom: 0, right: 0)
+        tableView.rowHeight = 110
         
         viewModel.fetchSimilarMovies { [weak self] in
             self?.viewModel.fetchMovieDetail { [weak self] in
                 self?.tableView.dataSource = self
+                self?.tableView.delegate = self
                 self?.tableView.reloadData()
+                if let teste = self?.viewModel.mainMovie?.poster_path,
+                    let teste2 = self?.baseURL {
+                    self?.moviePoster.loadImageMovie(urlString: teste2 + teste)
+                }
             }
         }
     }
@@ -75,7 +83,7 @@ extension MoviesViewController: ViewConfiguration {
     }
     
     func configureViews() {
-        self.tableView.backgroundColor = .blue
+        self.tableView.backgroundColor = .black
     }
 }
 
@@ -97,30 +105,25 @@ extension MoviesViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: DetailsTableViewCell.self)
             cell.setup(movieData: viewModel.mainMovie)
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(for: indexPath, cellType: SimilarMoviesViewCell.self)
             let movie = viewModel.cellForRowAt(indexPath: indexPath)
             cell.setCell(movie)
+            cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false
             return cell
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y = 500 - (scrollView.contentOffset.y + 500)
+        let y = 300 - (scrollView.contentOffset.y + 300)
         
-        let height = min(max(y, 0), 700)
+        let height = min(max(y, 0), 400)
         
         moviePoster.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
-        moviePoster.loadImageMovie(urlString: urlImage)
+        
     }
 }
 

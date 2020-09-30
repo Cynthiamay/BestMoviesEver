@@ -27,7 +27,8 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
     lazy var lblTitle: UILabel = {
         let title = UILabel()
         title.textColor = UIColor.red
-        title.font = title.font.withSize(20)
+        title.font = title.font.withSize(18)
+        title.numberOfLines = 2
         title.isAccessibilityElement = true
         return title
     }()
@@ -35,13 +36,15 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
     lazy var lblYear: UILabel = {
         let title = UILabel()
         title.textColor = UIColor.red
+        title.font = title.font.withSize(18)
         title.isAccessibilityElement = true
         return title
     }()
     
     lazy var lblGenre: UILabel = {
         let title = UILabel()
-        title.textColor = UIColor.red
+        title.textColor = UIColor.white
+        title.font = title.font.withSize(18)
         title.isAccessibilityElement = true
         return title
     }()
@@ -60,7 +63,7 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
         setupViewConfiguration()
         
         self.lblTitle.text = movieTitle
-        self.lblYear.text = releaseDate
+        self.lblYear.text = convertDateRelease(releaseDate)
         
         guard let posterString = poster else {return}
         baseURL = "https://image.tmdb.org/t/p/w300" + posterString
@@ -76,50 +79,64 @@ class SimilarMoviesViewCell: UITableViewCell, Reusable {
         for i in genre {
             switch i {
             case 28:
-                category = "Ação"
+                category = category + " Ação,"
             case 12:
-                category = "Aventura"
+                category = category + " Aventura,"
             case 16:
-                category = "Animação"
+                category = category + " Animação,"
             case 35:
-                category = "Comédia"
+                category = category + " Comédia,"
             case 80:
-                category = "Crime"
+                category = category + " Crime,"
             case 99:
-                category = "Documentário"
+                category = category + " Documentário,"
             case 18:
-                category = "Drama"
+                category = category + " Drama,"
             case 10751:
-                category = "Família"
+                category = category + " Família,"
             case 14:
-                category = "Fantasia"
+                category = category + " Fantasia,"
             case 36:
-                category = "História"
+                category = category + " História,"
             case 27:
-                category = "Horror"
+                category = category + " Horror,"
             case 10402:
-                category = "Música"
+                category = category + " Música,"
             case 9648:
-                category = "Mistério"
+                category = category + " Mistério,"
             case 10749:
-                category = "Romance"
+                category = category + " Romance,"
             case 878:
-                category = "Ficção científica"
+                category = category + " Ficção científica,"
             case 10770:
-                category = "Cinema TV"
+                category = category + " Cinema TV,"
             case 53:
-                category = "Thriller"
+                category = category + " Thriller,"
             case 10752:
-                category = "Guerra"
+                category = category + " Guerra,"
             case 37:
-                category = "Faroeste"
+                category = category + " Faroeste,"
             default:
-                category = ""
+                category = category + ""
             }
         }
-//        category = String(category.dropLast())
+        category = String(category.dropLast())
         return category
     }
+    
+    func convertDateRelease(_ date: String?) -> String {
+        var fixDate = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyy-MM-dd"
+        if let originalDate = date {
+            if let newDate = dateFormatter.date(from: originalDate) {
+                dateFormatter.dateFormat = "yyyy"
+                fixDate = dateFormatter.string(from: newDate)
+            }
+        }
+        return fixDate
+    }
+    
 }
 extension SimilarMoviesViewCell: ViewConfiguration {
     func buildViewHierarchy() {
@@ -140,23 +157,24 @@ extension SimilarMoviesViewCell: ViewConfiguration {
         moviePoster.snp.makeConstraints { (make) in
             make.width.equalTo(100)
             make.leading.equalTo(self).offset(16)
-            make.top.equalTo(container.snp.top).offset(1)
-            make.bottom.equalTo(container.snp.bottom).offset(-1)
+            make.top.equalTo(container.snp.top).offset(5)
+            make.bottom.equalTo(container.snp.bottom).offset(-5)
         }
         
         lblTitle.snp.makeConstraints { (make) in
-            make.left.equalTo(moviePoster.snp.right).offset(1)
-            make.top.equalTo(container.snp.top).offset(16)
+            make.left.equalTo(moviePoster.snp.right).offset(10)
+            make.right.equalTo(container.snp.right).offset(-15)
+            make.top.equalTo(container.snp.top).offset(30)
 //            make.left.equalTo(container.snp.left).offset(-1)
         }
         lblYear.snp.makeConstraints { (make) in
-            make.left.equalTo(moviePoster.snp.right).offset(1)
-            make.top.equalTo(lblTitle.snp.bottom).offset(10)
+            make.left.equalTo(moviePoster.snp.right).offset(10)
+            make.top.equalTo(lblTitle.snp.bottom).offset(8)
 //            make.left.equalTo(container.snp.left).offset(-1)
         }
         lblGenre.snp.makeConstraints { (make) in
             make.left.equalTo(lblYear.snp.right).offset(1)
-//            make.top.equalTo(container.snp.top).offset(7)
+            make.top.equalTo(lblTitle.snp.bottom).offset(8)
 //            make.left.equalTo(container.snp.left).offset(-1)
         }
     }
