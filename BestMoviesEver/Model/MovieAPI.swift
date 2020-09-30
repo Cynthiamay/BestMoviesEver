@@ -11,7 +11,6 @@ import Foundation
 public class MovieAPI {
     
     private var dataTask: URLSessionDataTask?
-    let baseURL: String = "https://image.tmdb.org/t/p/w600_and_h900_bestv2"
     let urlSimilar = "http://api.themoviedb.org/3/movie/497/similar?api_key=f3ed49f55cf67d06db9ad41bccf247d4&language=pt-BR&page=1"
     
     let urlDetails = "https://api.themoviedb.org/3/movie/497?api_key=f3ed49f55cf67d06db9ad41bccf247d4&language=pt-BR"
