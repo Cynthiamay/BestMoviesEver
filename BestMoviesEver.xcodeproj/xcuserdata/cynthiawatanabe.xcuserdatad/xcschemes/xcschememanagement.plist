@@ -7,7 +7,20 @@
 		<key>BestMoviesEver.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>8B08976A251C56660080CDC6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8B08977E251C56680080CDC6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

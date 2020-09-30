@@ -1,0 +1,24 @@
+PODS:
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - Reusable
+  - SnapKit (= 4.2.0)
+
+SPEC REPOS:
+  trunk:
+    - Reusable
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 10135a74e81b9fc24606d5a3e5c9caa5cf35c4c7
+
+COCOAPODS: 1.8.4

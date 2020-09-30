@@ -12,7 +12,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let controller = MoviesViewController()
+        self.addChild(controller)
+        view.addSubview(controller.view)
+        controller.didMove(toParent:self)
     }
 
 
